@@ -4,6 +4,7 @@ const formFieldKey = 'feedback-form-state';
 const inputValue = JSON.parse(localStorage.getItem(formFieldKey)) || {};
 inputForm.addEventListener('input', throttle(formFields, 500));
 inputForm.addEventListener('submit', formSubmit);
+updateData()
 
 function formFields(evt){
     if (evt.target.nodeName === "INPUT") {
@@ -15,15 +16,17 @@ function formFields(evt){
 }
 function formSubmit(event){
 event.preventDefault()
-console.log(inputValue);
-event.currentTarget.reset();
-localStorage.removeItem(formFieldKey);
+ if (inputForm.elements.email.value && inputForm.elements.message.value) {
+    console.log(inputValue);
+    event.currentTarget.reset();
+    localStorage.removeItem(formFieldKey); 
+}
+return;
 };
 function updateData(){
 if (localStorage.getItem(formFieldKey)) {
-    const parcedValues = JSON.parse(localStorage.getItem(formFieldKey)|| "")
+    const parcedValues = JSON.parse(localStorage.getItem(formFieldKey))
     inputForm.elements.email.value = parcedValues.email || "";
     inputForm.elements.message.value = parcedValues.message || "";
 }
 }
-updateData()
