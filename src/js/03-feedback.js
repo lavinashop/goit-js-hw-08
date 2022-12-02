@@ -21,7 +21,6 @@ event.preventDefault()
     event.currentTarget.reset();
     localStorage.removeItem(formFieldKey); 
 }
-return;
 };
 function updateData(){
 if (localStorage.getItem(formFieldKey)) {
